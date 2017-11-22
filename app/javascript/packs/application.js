@@ -7,4 +7,18 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-console.log('Hello World from Webpacker')
+console.log('Hello World from Webpacker');
+
+// https://github.com/renchap/webpacker-react#usage
+import WebpackerReact from 'webpacker-react';
+import HelloReact from '../components/HelloReact';
+
+// Register your root components (those you want to load from your HTML) here.
+WebpackerReact.setup({
+  HelloReact
+});
+
+// https://github.com/rails/webpacker/issues/336#issuecomment-304107330
+document.addEventListener('turbolinks:before-cache', () =>
+  WebpackerReact.unmountComponents()
+);

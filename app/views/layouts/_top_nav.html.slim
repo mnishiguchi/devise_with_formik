@@ -1,0 +1,48 @@
+-# https://bulma.io/documentation/components/navbar/#transparent-navbar
+nav.navbar role="navigation" aria-label="main navigation"
+  .navbar-brand
+    = link_to root_path, class: "navbar-item" do
+      img alt=("logo") src="https://www.mnishiguchi.com/images/logo_80_white.png" /
+    .navbar-burger.burger data-target="navbarBurgerTarget"
+      span
+      span
+      span
+  #navbarBurgerTarget.navbar-menu
+    .navbar-start
+    .navbar-end
+      = link_to "Home", root_path, class: "navbar-item"
+      .navbar-item.has-dropdown.is-hoverable
+        = link_to current_user&.email || 'Welcome!', new_user_session_path, class: "navbar-item"
+        .navbar-dropdown.is-boxed.is-right
+          - if user_signed_in?
+            = link_to 'Log out', destroy_user_session_path, data: {confirm: 'Are you sure?'}, method: :delete, class: "navbar-item"
+          - else
+            = link_to 'Sign up', new_user_registration_path, class: "navbar-item"
+            = link_to 'Log in', new_user_session_path, class: "navbar-item"
+
+javascript:
+  // FIXME: https://github.com/turbolinks/turbolinks#running-javascript-when-a-page-loads
+  // Adopted from: https://bulma.io/documentation/components/navbar/#navbar-menu
+  document.addEventListener('turbolinks:load', function () {
+
+    // Get all "navbar-burger" elements
+    var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+
+      // Add a click event on each of them
+      $navbarBurgers.forEach(function ($el) {
+        $el.addEventListener('click', function () {
+
+          // Get the target from the "data-target" attribute
+          var target = $el.dataset.target;
+          var $target = document.getElementById(target);
+
+          // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+          $el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+        });
+      });
+    }
+  });

@@ -1,0 +1,7 @@
+-# Convert devise flash keys to bulma-compatible keys.
+-# * devise: notice, alert
+-# * bulma: primary, link, info, success, warning, danger
+- flash.each do |type, message|
+  - type = :success if notice
+  - type = :danger  if alert
+  div [class="notification is-#{type} flash_message"] = message
