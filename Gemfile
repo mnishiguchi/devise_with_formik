@@ -36,6 +36,9 @@ gem "jbuilder", "~> 2.5"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem "sprockets", ">= 4.0.0.beta6"
+gem "sprockets-rails", require: "sprockets/railtie"
+gem "babel-transpiler", "~> 0.7.0"
 gem "slim-rails"
 gem "devise"
 

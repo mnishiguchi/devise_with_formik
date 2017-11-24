@@ -1,0 +1,55 @@
+h2 Account Settings
+- resource.skip_field_error_wrapper = true
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "ui large form"}) do |f|
+  = devise_error_messages!
+
+  .ui.message
+    .header Information
+    p
+      .field
+        .ui.left.icon.input
+          i.user.icon
+          = f.email_field :email, autofocus: true, placeholder: "email"
+      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+        div Currently waiting confirmation for: #{resource.unconfirmed_email }
+
+  .ui.message
+    .header Social
+    p
+      a.ui.facebook.button href="#"
+        i.facebook.icon
+        | Facebook
+      a.ui.twitter.button href="#"
+        i.twitter.icon
+        | Twitter
+      a.ui.google.plus.button href="#"
+        i.google.plus.icon
+        | Google Plus
+      a.ui.linkedin.button href="#"
+        i.linkedin.icon
+        | LinkedIn
+
+  .ui.message
+    .header Password
+    p
+      .field
+        .ui.left.icon.input
+          i.lock.icon
+          = f.password_field :password, autocomplete: "off", placeholder: "New Password (Leave blank if you don't wish to change it)"
+      .field
+        .ui.left.icon.input
+          i.lock.icon
+          = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm New Password"
+      .field
+        .ui.left.icon.input
+          i.lock.icon
+          = f.password_field :current_password, autocomplete: "off", placeholder: "Current Password (Needed if you change your password)"
+
+  .ui.message.negative
+    .header Delete Account
+    p
+      | If you wish you can delete your account. Your authored kata, solutions and comments will remain but will instead be attached to a generic profile that is not associated with any of your personal information. After deleting your account you are free to sign up again using the same email address.
+    = link_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "negative ui button"
+
+  .actions style="margin-top: 2em;"
+    = f.button "Update", class: "positive ui button", type: :submit

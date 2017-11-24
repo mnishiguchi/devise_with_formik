@@ -12,4 +12,19 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require semantic_ui
 //= require_tree .
+
+window.App || (window.App = {});
+
+// Page-specific JavaScript
+class Page {
+  constructor() {
+    this.controller = document.body.dataset.controller;
+    this.action = document.body.dataset.action;
+  }
+}
+
+document.addEventListener('turbolinks:load', function() {
+  window.App.page = new Page();
+});

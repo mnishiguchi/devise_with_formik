@@ -1,24 +1,11 @@
 doctype html
 html
-  head
-    meta [content="text/html" charset="UTF-8", http-equiv="Content-Type"]
-    meta [name="viewport" content="width=device-width, initial-scale=1.0"]
-    = csrf_meta_tags
+  = render "layouts/head"
 
-    title DeviseWithFormik
-
-    -# Asset pipeline
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-
-    -# Webpacker
-    = stylesheet_pack_tag    'global', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag    'application', 'data-turbolinks-track': 'reload'
-
-    /[if lt IE 9]
-      script [src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"]
-  body
-    = render "layouts/flash"
-    = render "layouts/top_nav"
-    main.section
-      .container= yield
+  = content_tag :body, class: "#{action_name}_view", id: controller_name, data: { action: action_name, controller: controller_name } do
+    = render "layouts/navbar"
+    .ui.raised.very.padded.text.container.segment
+      .flash style="margin-top: -24px;"
+        = render "layouts/flash"
+      = yield
+    = render "layouts/footer"
