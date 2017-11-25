@@ -1,34 +1,6 @@
 <%= render "users/shared/auth_module_header", title: "Sign up" %>
 
-<% resource.skip_field_error_wrapper = true %>
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "ui large form"}) do |f| %>
-  <div class="ui stacked segment">
-    <%= devise_error_messages! %>
-
-    <div class="field">
-      <div class="ui left icon input">
-        <i class="user icon"></i>
-        <%= f.email_field :email, autofocus: true, placeholder: "email" %>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="ui left icon input">
-        <i class="lock icon"></i>
-        <%= f.password_field :password, autocomplete: "off", placeholder: @minimum_password_length ? "password (#{@minimum_password_length} characters minimum)" : "password" %>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="ui left icon input">
-        <i class="lock icon"></i>
-        <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "password confirmation" %>
-      </div>
-    </div>
-
-    <%= f.submit "Sign up", class: "ui fluid large teal submit button" %>
-  </div>
-<% end %>
+<%= react_component 'SignUpForm', {} %>
 
 <div class="ui message">
   <%= render "users/shared/links" %>

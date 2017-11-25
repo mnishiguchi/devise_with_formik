@@ -9,13 +9,19 @@
 
 console.log('Hello World from Webpacker');
 
+// Play with lodash in dev console
+import _ from 'lodash';
+window._ = _;
+
 // https://github.com/renchap/webpacker-react#usage
 import WebpackerReact from 'webpacker-react';
 import HelloReact from '../components/HelloReact';
+import SignUpForm from '../components/SignUpForm';
 
 // Register your root components (those you want to load from your HTML) here.
 WebpackerReact.setup({
-  HelloReact
+  HelloReact,
+  SignUpForm
 });
 
 // https://github.com/rails/webpacker/issues/336#issuecomment-304107330
