@@ -1,4 +1,4 @@
-<%= render "devise/shared/auth_module_header", title: "Forgot your password? (or haven't set it yet?)" %>
+<%= render "users/shared/auth_module_header", title: "Forgot your password? (or haven't set it yet?)" %>
 
 <% resource.skip_field_error_wrapper = true %>
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, html: {class: "ui large form"}) do |f| %>
@@ -17,5 +17,5 @@
 <% end %>
 
 <div class="ui message">
-  <%= render "devise/shared/links" %>
+  <%= render "users/shared/links" %>
 </div>

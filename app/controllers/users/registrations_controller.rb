@@ -1,5 +1,4 @@
-class RegistrationsController < Devise::RegistrationsController
-
+class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   # https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-edit-their-account-without-providing-a-password
