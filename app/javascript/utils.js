@@ -6,6 +6,7 @@ export const underscoreKeys = object => humps.decamelizeKeys(object);
 export const camelize = string => humps.camelize(string);
 export const underscore = string => humps.decamelize(string);
 
+// https://github.com/rails/rails/blob/master/actionview/app/assets/javascripts/rails-ujs/utils/csrf.coffee
 export const csrfToken = () => {
   const meta = document.querySelector('meta[name="csrf-token"]');
   return meta && meta.content;

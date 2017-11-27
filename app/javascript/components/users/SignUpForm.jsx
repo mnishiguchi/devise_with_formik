@@ -2,13 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import Yup from 'yup';
-import { Form, Button } from 'semantic-ui-react';
-import { convertFormFieldNamesForRailsModel } from '../utils';
-import FormErrorMessage from './shared/FormErrorMessage';
-import AuthenticityToken from './shared/AuthenticityToken';
-import Utf8 from './shared/Utf8';
+import classnames from 'classnames';
+import { Button } from 'semantic-ui-react';
+import { convertFormFieldNamesForRailsModel } from 'utils';
+import FormErrorMessage from 'components/shared/FormErrorMessage';
+import AuthenticityToken from 'components/shared/AuthenticityToken';
+import TextInput from 'components/shared/TextInput';
+import Utf8 from 'components/shared/Utf8';
 
 const formAction = '/users';
+
+// Reference to the form element.
+let $form = null;
 
 // https://github.com/jaredpalmer/formik
 // https://react.semantic-ui.com/collections/form#form-example-subcomponent-control
@@ -29,59 +34,59 @@ const InnerForm = props => {
   // Rails form would generates field names like name="user[email]" whereas simple field names like
   // name="email" are preferrable in Formik.
   return (
-    <Form
+    <form
+      method="post"
       action={formAction}
+      acceptCharset="UTF-8"
+      className="ui large form"
+      ref={node => ($form = node)}
       onSubmit={handleSubmit}
       onKeyPress={event => {
         if (event.which === 13 /* Enter */) {
           event.preventDefault();
         }
       }}
-      acceptCharset="UTF-8"
-      method="post"
     >
       <Utf8 />
       <AuthenticityToken />
 
-      <Form.Field
-        control={Form.Input}
+      <TextInput
         type="email"
         label="Email"
         name="email"
+        iconClassName="user icon"
         placeholder="Enter your email"
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
-        className={errors.email && touched.email ? 'error' : ''}
+        error={touched.email && errors.email}
       />
 
-      <Form.Field
-        control={Form.Input}
+      <TextInput
         type="password"
         label="Password"
         name="password"
+        iconClassName="lock icon"
         placeholder="Enter your password"
         value={values.password}
         onChange={handleChange}
         onBlur={handleBlur}
-        className={errors.password && touched.password && 'error'}
+        error={touched.password && errors.password}
       />
 
-      <Form.Field
-        control={Form.Input}
+      <TextInput
         type="password"
         label="Password confirmation"
         name="passwordConfirmation"
+        iconClassName="lock icon"
         placeholder="Confirm your password"
         value={values.passwordConfirmation}
         onChange={handleChange}
         onBlur={handleBlur}
-        className={
-          errors.passwordConfirmation && touched.passwordConfirmation && 'error'
-        }
+        error={touched.passwordConfirmation && errors.passwordConfirmation}
       />
 
-      {<FormErrorMessage errors={errors} touched={touched} />}
+      <FormErrorMessage errors={errors} touched={touched} />
 
       <Button onClick={handleReset} disabled={!dirty || isSubmitting}>
         Reset
@@ -89,7 +94,7 @@ const InnerForm = props => {
       <Button positive type="submit" disabled={isSubmitting}>
         Sign Up
       </Button>
-    </Form>
+    </form>
   );
 };
 
@@ -117,8 +122,6 @@ const SignUpForm = withFormik({
       setFieldError('password', 'Password must match password confirmation');
       return;
     }
-
-    const $form = document.querySelector(`form[action='${formAction}']`);
 
     convertFormFieldNamesForRailsModel($form, 'user', [
       'email',

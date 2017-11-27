@@ -15,12 +15,10 @@ window._ = _;
 
 // https://github.com/renchap/webpacker-react#usage
 import WebpackerReact from 'webpacker-react';
-import HelloReact from '../components/HelloReact';
-import SignUpForm from '../components/SignUpForm';
+import SignUpForm from 'components/users/SignUpForm';
 
 // Register your root components (those you want to load from your HTML) here.
 WebpackerReact.setup({
-  HelloReact,
   SignUpForm
 });
 

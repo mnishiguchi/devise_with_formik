@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Message } from 'semantic-ui-react';
 
+// A message box with a list of form validation errors. Return null if this is no error.
 const FormErrorMessage = ({ errors, touched, header }) => {
   // Array of field names
   const touchedFieldNames = Object.entries(touched).map(
@@ -28,7 +29,7 @@ const FormErrorMessage = ({ errors, touched, header }) => {
 FormErrorMessage.propTypes = {
   errors: PropTypes.object,
   touched: PropTypes.object,
-  header: PropTypes.string,
-}
+  header: PropTypes.string
+};
 
-export default FormErrorMessage
+export default FormErrorMessage;
